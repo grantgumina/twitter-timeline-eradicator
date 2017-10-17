@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="js/mixpanel.js"></script>
+    <script type="text/javascript" src="js/moment.js"></script>
+    <script type="text/javascript" src="js/vue.js"></script>
+    <script type="text/javascript" src="js/popup.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/popup.css">
+</head>
+<body>
+    <div class="container-fluid" id="application">
+
+        <div id="no-articles" v-if="recommendedArticles.length == 0 && similarArticles.length == 0">
+            <h3>There aren't any articles to show you right now.</h3>
+        </div>
+
+        <div id="top-recommended-article" v-if="topRecommendedArticle != null">
+            <h3>Recommended</h3>
+            <ul class="article-list">
+                <li>
+                    <a v-bind:href="topRecommendedArticle.url" target="_blank">
+                        <strong>{{topRecommendedArticle.source_name}}</strong>: {{topRecommendedArticle.title}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- More recommended articles -->
+        <div id="other-recommended-articles" v-if="recommendedArticles.length > 1">
+            <!-- More recommended articles button -->
+            <div @click="toggleMoreRecommendedArticles()" v-if="!showMoreRecommendedArticles">
+                <span class="toggle">(+) More Recommended Articles</span>
+            </div>
+
+            <!-- More recommended articles -->
+            <ul class="article-list" v-for="article in otherRecommendedArticles" v-if="showMoreRecommendedArticles">
+                <li>
+                    <a target="_blank" v-bind:href="article.url">
+                        <strong>{{article.source_name}}</strong>: {{article.title}}
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Less recommended articles button -->
+            <div @click="toggleMoreRecommendedArticles()" v-if="showMoreRecommendedArticles">
+                <span class="toggle">(-) Less Recommended Articles</span>
+            </div>
+        </div>
+
+        <!-- Similar articles -->
+        <div id="similar-articles" v-if="similarArticles.length != 0">
+            <!-- More similar articles button -->
+            <div @click="toggleSimilarArticles()" v-if="!showSimilarArticles">
+                <span class="toggle">(+) Show Similar Articles</span>
+            </div>
+
+            <div v-if="showSimilarArticles">
+                <h3>Similar to this article</h3>
+                <ul class="article-list" v-for="article in similarArticles">
+                    <li>
+                        <a v-bind:href="article.url" target="_blank">
+                            <strong>{{article.source_name}}</strong>: {{article.title}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Less similar articles button -->
+            <div @click="toggleSimilarArticles()" v-if="showSimilarArticles">
+                <span class="toggle">(-) Hide Similar Articles</span>
+            </div>
+        </div>
+
+        <!-- Information -->
+        <div id="information">
+            <ul>
+                <li @click="openUrl('https://medium.com/@grantgumina/balanced-df0437526e60')" class="extension-info"><a tabindex="-1">About</a> | </li>
+                <li @click="openUrl('https://github.com/grantgumina/balanced/issues')" class="extension-info"><a tabindex="-1">File a Bug</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

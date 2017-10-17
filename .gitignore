@@ -1,0 +1,7 @@
+.thumbs
+.DS_Store
+creds.txt
+*.swo
+*.swp
+start_datetime.txt
+*.pyc
