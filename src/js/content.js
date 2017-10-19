@@ -35,13 +35,7 @@ if (dashboardElement)
     dashboardElement.innerHTML = "";
 
 if (timelineElement)
-timelineElement.innerHTML = "";
-
-// Start listening to the page for changes
-document.addEventListener('DOMSubtreeModified', function () {
-    // if (timelineElement.innerHTML != globalQuoteHTML)
-    //     timelineElement.innerHTML = globalQuoteHTML;
-});
+    timelineElement.innerHTML = "";
 
 // Set default quote
 globalQuoteHTML = quoteBuilder("Jordan B. Peterson", "Whether the gods are inside or outside makes very little difference to whether there are gods.", "");
