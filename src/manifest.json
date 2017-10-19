@@ -3,20 +3,33 @@
     "name": "Twitter Timeline Eradicator",
     "short_name": "Twitter Timeline Eradicator",
     "version": "0.0.1",
-
-    "description": "Get rid fo your Twitter addiction",
-
+    "description": "Get rid of your Twitter addiction",
     "permissions": [
         "tabs"
     ],
-
-    "content_scripts": [{
-        "matches": ["*://*.twitter.com/*"],
-        "run_at": "document_end",
-        "js": ["js/content.js"],
-        "css": ["css/quote.css"]
-    }],
-
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.twitter.com/*"
+            ],
+            "run_at": "document_start",
+            "css": [
+                "css/eradicate.css"
+            ]
+        },
+        {
+            "matches": [
+                "*://*.twitter.com/*"
+            ],
+            "run_at": "document_end",
+            "js": [
+                "js/content.js"
+            ],
+            "css": [
+                "css/quote.css"
+            ]
+        }
+    ],
     "icons": {
         "16": "img/yinyang_16.png",
         "48": "img/yinyang_48.png",
