@@ -10,3 +10,8 @@
 .grant-iqs-author {
     margin-left: 50px;
 }
+
+.grant-iqs-border {
+    border-left: 4px solid rgb(153, 153, 255);
+    padding-left: 10px;
+}

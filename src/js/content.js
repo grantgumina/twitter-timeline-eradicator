@@ -3,17 +3,16 @@ var globalQuoteHTML = "";
 function makeHTTPRequest(theUrl)
 {
     return new Promise(function (resolve, reject) {
-        
         var request = new XMLHttpRequest();
         request.onload = resolve;
         request.onerror = reject;
-        request.open("GET", theUrl, true); // true for asynchronous 
+        request.open("GET", theUrl, true);
         request.send(null);
     });
 }
 
 function quoteBuilder(author, quote, link) {
-    var quoteHTML = "<div class='grant-iqs'><span>\"" + quote + "\"<br/><br/></span><span class='grant-iqs-author'>-" + author + "</span></div>";
+    var quoteHTML = "<div class='grant-iqs'><div class='grant-iqs-border'><span>\"" + quote + "\"<br/><br/></span><span class='grant-iqs-author'>-" + author + "</span></div></div>";
     return quoteHTML;
 }
 
@@ -45,7 +44,7 @@ document.addEventListener('DOMSubtreeModified', function () {
 });
 
 // Set default quote
-globalQuoteHTML = quoteBuilder("By Me", "This is an inspirational quote", "");
+globalQuoteHTML = quoteBuilder("Jordan B. Peterson", "Whether the gods are inside or outside makes very little difference to whether there are gods.", "");
 timelineElement.innerHTML = globalQuoteHTML;
 
 // Attempt to get quote of the day
