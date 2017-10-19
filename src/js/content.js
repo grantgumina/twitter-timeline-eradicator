@@ -17,10 +17,10 @@ function quoteBuilder(author, quote, link) {
 }
 
 function parseJSONToGetQuote(json) {
-    var author = json['contents']['quotes'][0]['author'];
-    var quote = json['contents']['quotes'][0]['quote'];
-    var link = json['contents']['quotes'][0]['permalink'];
-
+    var author = json['author'];
+    var quote = json['quote'];
+    var link = "";
+    
     var inspirationalQuoteString = quoteBuilder(author, quote, link);
 
     return inspirationalQuoteString;
@@ -37,12 +37,8 @@ if (dashboardElement)
 if (timelineElement)
     timelineElement.innerHTML = "";
 
-// Set default quote
-globalQuoteHTML = quoteBuilder("Jordan B. Peterson", "Whether the gods are inside or outside makes very little difference to whether there are gods.", "");
-timelineElement.innerHTML = globalQuoteHTML;
-
 // Attempt to get quote of the day
-var httpPromise = Promise.resolve(makeHTTPRequest("https://quotes.rest/qod.json"));
+var httpPromise = Promise.resolve(makeHTTPRequest("https://talaikis.com/api/quotes/random/"));
 
 httpPromise.then(function (response) {
     var json = JSON.parse(response['target']['response']);
@@ -59,6 +55,10 @@ httpPromise.then(function (response) {
 
 }, function (error) {
     console.log(error);
+
+    // Set default quote when the HTTP request fails
+    globalQuoteHTML = quoteBuilder("Jordan B. Peterson", "Whether the gods are inside or outside makes very little difference to whether there are gods.", "");
+    timelineElement.innerHTML = globalQuoteHTML;
 }).then(function () {
     
 });
